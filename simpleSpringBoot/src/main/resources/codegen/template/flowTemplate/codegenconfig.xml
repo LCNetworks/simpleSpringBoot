@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="codegen.xsd">
+	<variables>
+		<variable name="developer" value="zhs" />
+		<variable name="company" value="北京信普达系统工程有限公司" />
+		<variable name="projectName" value="orgAndAuthority"/>
+		<variable name="comment" value="请假申请流程测试" />
+	</variables>
+	
+	<templates>
+		<template id="model" path="flowTemplate/model.ftl"/>
+		<template id="dao" path="flowTemplate/dao.ftl"/>
+		<template id="service"  path="flowTemplate/service.ftl"/>
+		<template id="controller"  path="flowTemplate/controller.ftl"/>
+		<template id="mapper" path="flowTemplate/mapper.ftl"/>
+		<template id="list" path="flowTemplate/list.jsp"/>
+		<template id="edit" path="flowTemplate/edit.jsp"/>
+	</templates>
+	
+	<files baseDir="D:\Users\sen\workspace\bpmx3_dev" >
+ 		<file refTemplate="mapper" filename="{class}.map.xml" dir="resources\isunland\orgAndAuthority\{system}\maper"  sub="true"  override="true"/> 
+ 		<file refTemplate="model" filename="{class}.java" dir="src\isunlandSrc\orgAndAuthority\{system}\model\{package}"  sub="true" override="true"/> 
+ 		<file refTemplate="dao" filename="{class}Dao.java" dir="src\isunlandSrc\orgAndAuthority\{system}\dao\{package}" sub="true"  override="true"/>
+		<file refTemplate="service" filename="{class}Service.java" dir="src\isunlandSrc\orgAndAuthority\{system}\service\{package}"  override="true"/>
+		<file refTemplate="controller" filename="{class}Controller.java" dir="src\isunlandSrc\orgAndAuthority\{system}\controller\{package}"  override="true"/>
+		<file refTemplate="list" filename="{classVar}List.jsp" dir="web\WEB-INF\view\isunlandUI\orgAndAuthority\{system}\{package}" override="true"/>
+		<file refTemplate="edit" filename="{classVar}Edit.jsp" dir="web\WEB-INF\view\isunlandUI\orgAndAuthority\{system}\{package}" override="true"/>
+	</files>
+	
+	<table tableName="flowdemo">
+		<variable name="system" value="orgAndAuthority"/>
+		<variable name="class" value="Flowdemo"/>
+		<variable name="package" value="myflow"/>
+		<variable name="classVar" value="flowdemo"/>
+		<variable name="tableUser" value="bpmx"/>
+		<variable name="flowKey" value="flowdemokey"/>
+	</table>
+</config>

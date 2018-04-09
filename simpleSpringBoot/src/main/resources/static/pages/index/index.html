@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>查询图片gps</title>
+</head>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="../../plugin/bootstrap-fileinput/css/fileinput.min.css">
+<link rel="stylesheet" href="../../css/index/index.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/jquery-1.9.1.min.js"></script>
+<script src="../../plugin/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="../../plugin/bootstrap-fileinput/js/locales/zh.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<body>
+	<div class="page-header">
+	  <h1>主页 <small>小工具</small></h1>
+	</div>
+	<div>
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">查看图片地址</a></li>
+	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">功能1</a></li>
+	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">功能2</a></li>
+	    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">功能3</a></li>
+	  </ul>
+	
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="home">
+	    	<button type="button" class="btn btn-primary " style="margin: 15px 15px 0px 15px;" data-toggle="modal" data-target="#myModal">
+			  历史记录
+			</button>
+			<button type="button" class="btn btn-info dropdown-toggle" style="margin: 15px 15px 0px 15px;" onclick='javascript:window.open("http://map.baidu.com/?title=%E6%88%91%E7%9A%84%E4%BD%8D%E7%BD%AE&autoOpen=true");void(0);'>
+			 导航一下
+			</button>
+		    <div id="container" class="htmleaf-container" style="width:80%;height:300px;margin-left: 0%  ">
+		        <div class="container kv-main">
+		            <form enctype="multipart/form-data">
+		                <label><!-- 查询图片gps --></label> <input id="file-zh" name="files" type="file"
+		                    multiple>
+		                <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过5.0M</p>
+		            </form>
+		            <hr>
+		            <br>
+		        </div>
+		        <div id="footer">
+		    	
+		    	</div>
+		    </div>
+		    
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">历史记录</h4>
+			      </div>
+			      <div id="history" class="modal-body">
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			        <a id="download" tabindex="0" class="btn btn-primary">下载</a>
+			        <div id="warnMsg" style="display: none" class="alert alert-warning" role="alert" align="left">无历史记录下载...</div>
+			        <!-- <a id="download" tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="提示" data-container="body" data-content="Sorry,功能未完成.">下载</a> -->
+			      </div>
+			    </div>
+			  </div>
+			</div>
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="profile">
+	    	<div class="embed-responsive embed-responsive-16by9">
+			  <iframe class="embed-responsive-item" src="baiduMap.html"></iframe>
+			</div>
+		</div>
+	    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+	    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+	  </div>
+	</div>
+<script type="text/javascript">
+$(function() {
+    //0.初始化fileinput
+    var oFileInput = new FileInput();
+    oFileInput.Init("file-zh", "/simple/gps/getAddress");
+    $('#download').popover({width:"145px"});
+    $("#download").click(function(){
+    	downloadHistroy();
+    })
+    $('#myModal').on('hidden.bs.modal', function (e) {
+    	$("#warnMsg").hide();
+	})
+});
+
+//初始化fileinput
+var FileInput = function() {
+    var oFile = new Object();
+
+    //初始化fileinput控件（第一次初始化）
+    oFile.Init = function(ctrlName, uploadUrl) {
+        var control = $('#' + ctrlName);
+
+        //初始化上传控件的样式
+        control.fileinput({
+            language: 'zh',
+            //设置语言
+            uploadUrl: uploadUrl,
+            //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],
+            //接收的文件后缀
+            showUpload: true,
+            //是否显示上传按钮
+            showCaption: false,
+            //是否显示标题
+            browseClass: "btn btn-primary",
+            //按钮样式 
+            //dropZoneEnabled: false,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            maxFileSize: 0,
+            //单位为kb，如果为0表示不限制文件大小
+            //minFileCount: 0,
+            maxFileCount: 10,
+            //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+        });
+
+        //导入文件上传完成之后的事件
+        $('#file-zh').on('fileuploaded',
+        function(event, data, previewId, index) {
+            var form = data.form,
+            files = data.files,
+            extra = data.extra,
+            response = data.response,
+            reader = data.reader;
+            var res = "";
+            for (var i = 0; i < response.length; i++) {
+                if (response[i].error) {
+                    res = res + response[i].file + " -- " + response[i].error;
+                } else {
+                    res = res + response[i].file + " -- " + response[i].addr;
+                }
+            }
+            if (response && response.length > 0) {
+                $('#footer').append("<p><label class='lab'>" + res + "</label></p>");
+                $('#history').append("<p><label class='lab'>" + res + "</label></p>");
+            }
+        });
+
+        //选择文件后处理事件
+        /* $("#file-zh").on("filebatchselected", function(event, files) {
+			$("#footer .lab").remove();
+		}); */
+        //点击浏览框右上角X 清空文件后响应事件
+        $("#file-zh").on("filecleared",
+        function(event, data, msg) {
+            $("#footer .lab").remove();
+        });
+    }
+    return oFile;
+};
+
+//下载历史记录
+function downloadHistroy(){
+	var labTit = "";
+	if($('#history .lab').length==0){
+		$("#warnMsg").show();
+		return;
+	}
+	$('#history .lab').each(function(){
+		labTit = labTit + $(this).text()+",";
+	})
+	labTit = labTit.substring(0,labTit.length-2);
+	console.log(labTit);
+	//方法二：通过form  
+    var $eleForm = document.createElement('form');
+    $eleForm.style = "display:none;";
+    $eleForm.method = 'get';
+    $eleForm.action = '/simple/gps/downloadHistory';
+	
+    var hdnFilePath = document.createElement('input');
+    hdnFilePath.type = 'hidden';
+    hdnFilePath.name = 'msg';
+    hdnFilePath.value = labTit;
+    $eleForm.appendChild(hdnFilePath);
+    
+    $(document.body).append($eleForm);  
+    //提交表单，实现下载  
+    $eleForm.submit();  
+}
+</script>
+</body>
+</html>

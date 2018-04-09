@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="codegen.xsd">
+	<variables>
+		<variable name="developer" value="czl" />
+		<variable name="company" value="ztgx" />
+		<variable name="projectName" value="mall"/>
+	</variables>
+	
+	<templates>
+		<!-- <template id="model" path="model.ftl"/> -->
+		<template id="dao" path="mall/api/dao.ftl"/>
+		<template id="service"  path="mall/api/service.ftl"/>
+		<template id="controllerLg"  path="mall/api/controllerLg.ftl"/>
+		<template id="mapper" path="mall/api/mapper.ftl"/>
+		
+		<!--  暂时不用 注掉  wzh 2014-01-20
+		<template id="pageEdit" path="pageEdit.jsp"/>
+		<template id="formValid" path="formValid.ftl" />
+		<template id="formproperties" path="formproperties.ftl" />
+		<template id="get"  path="get.jsp"/>
+ 		<template id="detail" path="detail.ftl"/> 
+		<template id="modify" path="modify.ftl"/>  
+		<template id="modifyPage" path="modifyPage.ftl"/>  
+		
+		<template id="mobileForm" path="mobileform.ftl"/>
+		<template id="mobileDetail" path="mobiledetail.ftl"/>
+		<template id="editByTab"  path="editByTab.jsp"/>
+		-->
+	</templates>
+<!--2014.01.20 start by  wzh 修改成当前项目路径   -->
+		<files baseDir="D:\czlworkspace\simpleSpringBoot" >
+<!--2014.01.20 end by  wzh 修改成当前项目路径     -->
+
+	<!--2014.01.20 start by  wzh 修改文件生成路径     -->  
+ 		<file refTemplate="mapper" filename="{class}Mapper.xml" dir="src\main\resources\mapper"  sub="true"  override="true"/> 
+ 		<!-- <file refTemplate="model" filename="{class}.java" dir="src\main\java\com\simple\entity"  sub="true" override="true"/> --> 
+ 		<file refTemplate="dao" filename="{class}Dao.java" dir="src\main\java\com\simple\dao" sub="true"  override="true"/>
+		<file refTemplate="service" filename="{class}Service.java" dir="src\main\java\com\simple\service"  override="true"/>
+		<file refTemplate="controllerLg" filename="{class}Action.java" dir="src\main\java\com\simple\controller"  override="true"/>
+ 		<!-- <file refTemplate="listLg" filename="{classVar}List.jsp" dir="web\WEB-INF\view\isunlandUI\{projectName}\{system}\{package}" override="true"/>
+   	<file refTemplate="edit" filename="{classVar}Edit.jsp" dir="web\WEB-INF\view\isunlandUI\{project}\{system}\{package}" override="true"/> -->
+    <!--2014.01.20 end by  wzh 修改文件生成路径     -->  	
+        	
+     <!--暂时不用，注掉  wzh 2014-01-20
+       <file refTemplate="pageEdit" filename="{classVar}Edit.jsp" dir="src\main\webapp\WEB-INF\view\test\{stystem}\{package}" override="true"/>
+	    <file refTemplate="editByTab" filename="{classVar}Edit.jsp" dir="web\WEB-INF\view\{system}\{package}" override="true"/> 
+		<file refTemplate="detail" filename="{classVar}Detail.jsp" dir="web\WEB-INF\view\test\{system}\{package}" override="true"/>
+		<file refTemplate="modifyPage" filename="{classVar}Modify.jsp" dir="web\WEB-INF\view\test\{system}\{package}" override="true"/>-->
+	</files>
+	
+		
+	 <!--2014.01.20 start by  wzh 测试-->
+	<table tableName="sys_menu">
+		<variable name="class" value="Menu"/>
+		<variable name="package" value="Menu"/>
+		<variable name="classVar" value="Menu"/>
+		
+		 <!--2014.01.20 start by  wzh 加入用户名-->
+			<variable name="tableUser" value="root"/>
+		 <!--2014.01.20 start by  wzh 加入用户名-->		
+		 <!-- <variable name="flowKey" value="CS122"/> --><!-- 流程相关 -->
+	</table>
+	 <!--2014.01.20 end by  wzh 测试-->
+	
+</config>

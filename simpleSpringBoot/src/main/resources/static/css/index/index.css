@@ -1,0 +1,34 @@
+html,body{
+	height: 98%;
+}
+#container {
+	min-height: 50%;	
+	background-color: #fff;
+}
+.container kv-main{
+	height: 90%;
+}
+/* #container:after{
+	display: block;
+	content : " ";
+} */
+footer{
+	width: 100%;
+	display: none;
+}
+.lab{
+	margin-left: 25px;
+	font-size: 16px
+}
+.rightTip{
+	float: right;
+}
+.page-header{
+	height : 8%;
+	margin-left: 25px;
+	margin-top: 10px;
+}
+.jumbotron{
+	height : 100px;
+	margin-left: 25px;
+}
