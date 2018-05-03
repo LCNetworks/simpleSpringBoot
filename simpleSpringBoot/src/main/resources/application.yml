@@ -44,6 +44,8 @@ spring:
           starttls:  
             enable: true  
             required: true
+  activiti:
+    check-process-definitions:false
 #上传文件大小
   http:
     multipart:
